@@ -129,17 +129,10 @@ async function app() {
     getCalibParam();
 
     try {
-        const res = await axiosWrapper.get(`/th`);
-        console.log(res.data.data);
-
         const monitorData = readData();
         const temp = monitorData.temperature;
         const hum = monitorData.humidity;
         const datetimeStamp = dayjs().toISOString();
-
-        console.log(`temp: ${temp}°C`);
-        console.log(`hum: ${hum} %`);
-        console.log(`${datetimeStamp}`);
 
         await axiosWrapper.post(`/th`, {
             temp,
@@ -149,7 +142,6 @@ async function app() {
     } catch (e) {
         console.log(e);
     }
-
 }
 
 app();
