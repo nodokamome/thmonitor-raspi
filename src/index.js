@@ -1,6 +1,9 @@
 import axios from 'axios'
 import i2c from 'i2c-bus'
 import dayjs from 'dayjs';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const busNumber = 1;
 const i2cAddress = 0x76;
@@ -118,7 +121,7 @@ function setup() {
 const axiosWrapper = axios.create({
     baseURL: 'https://thmonitor.nodokamome.com/api/v1',
     headers: {
-        'Authorization': 'token BAAv8nwmZKvZsNU2GYhPhA6K6NfYwUupRmBUyCth',
+        'Authorization': `token ${process.env.TOKEN}`,
         'Content-Type': 'application/json',
     }
 })
@@ -139,6 +142,9 @@ async function app() {
             hum,
             datetimeStamp
         });
+        console.log(temp);
+        console.log(hum);
+        console.log(datetimeStamp);
     } catch (e) {
         console.log(e);
     }
